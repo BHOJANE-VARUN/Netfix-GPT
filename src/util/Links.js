@@ -3,13 +3,6 @@ export const PHOTO_URL =  "https://www.google.com/imgres?imgurl=https%3A%2F%2Fim
 export const MOVIE_API = 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1';
 export const SEARCH_LEFT = 'https://api.themoviedb.org/3/search/multi?query=';
 export const SEARCH_RIGHT = '&include_adult=true&language=en-US&page=1';
-export const OPTIONS = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NGY5MzVkYjc3MDFhMjlhOWE0YTg2NmU1NTVjYjM2ZCIsIm5iZiI6MTcyMzU5NzU2Ni45MDEzMDYsInN1YiI6IjY2YmMwMWE2OWVjOTYxZGMxZGMzM2VlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TlIollqNN7DOlQEzTr8QsNzk4zEqiUy88Sx5GDVtwVQ'
-    }
-  };
 export const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 export const GENRE_TV = 'https://api.themoviedb.org/3/genre/tv/list?language=en-US';
 export const TV_BY_GENRE_LEF = "https://api.themoviedb.org/3/discover/tv?with_genres=";
