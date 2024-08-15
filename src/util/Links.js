@@ -14,5 +14,6 @@ export const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 export const GENRE_TV = 'https://api.themoviedb.org/3/genre/tv/list?language=en-US';
 export const TV_BY_GENRE_LEF = "https://api.themoviedb.org/3/discover/tv?with_genres=";
 export const TV_BY_GENRE_RIG = "&language=en-US&sort_by=popularity.desc";
+export const a =0;
 
 

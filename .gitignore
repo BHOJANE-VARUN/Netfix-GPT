@@ -12,7 +12,7 @@
 /build
 
 #authetication key
-./util/links.js
+/util
 
 # misc
 .DS_Store
