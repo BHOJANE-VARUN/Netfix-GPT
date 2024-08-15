@@ -11,6 +11,9 @@
 # production
 /build
 
+#authetication key
+./util/links.js
+
 # misc
 .DS_Store
 .env.local
