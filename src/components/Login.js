@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../util/userSlice.js";
-import { PHOTO_URL } from "../util/Links.js";
+import { BG_IMGAGE, PHOTO_URL } from "../util/Links.js";
 const Login = () => {
   const dispatch = useDispatch();
   const [Sign, setSign] = useState(false);
@@ -39,7 +39,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+         // console.log(user);
           updateProfile(auth.currentUser, {
             displayName: nam.current.value,
             photoURL:PHOTO_URL,
@@ -65,7 +65,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+        //  console.log(user);
         })
         .catch((error) => {
           const errorMessage = error.messages;
@@ -78,7 +78,7 @@ const Login = () => {
     <div className="relative w-full h-screen bg-black">
       <Heading className="relative z-10" />
       <img
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/826348c2-cdcb-42a0-bc11-a788478ba5a2/6d20b198-e7ab-4e9f-a1aa-666faa0298f9/IN-en-20240729-POP_SIGNUP_TWO_WEEKS-perspective_WEB_a67d8c9e-8121-4a74-98e4-8005eb2df227_large.jpg"
+        src={BG_IMGAGE}
         alt="bg-image"
         className="absolute top-0 left-0 w-full h-full object-cover opacity-60 z-0"
       />

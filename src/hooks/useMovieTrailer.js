@@ -11,7 +11,7 @@ const getBackground = async () => {
   const data = await raw.json();
   const talier = data.results.filter((video) => video.type === "Trailer");
   const backgroundvid = talier.length === 0 ? data.results[0] : talier[0];
-  console.log(backgroundvid);
+ // console.log(backgroundvid);
   dispatch(addTrailerVideo(backgroundvid));
 };
 useEffect(() => {

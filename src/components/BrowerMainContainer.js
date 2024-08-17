@@ -19,7 +19,7 @@ function BrowerMainContainer() {
   },[]);
   if(mov===null) return;
   return (
-    <div className=''>
+    <div className='w-screen'>
         <FirstmovieINFO name={mov.name} overview={mov.overview}/>
         <FirstMovieVideo movieid={mov.id}/>
     </div>
