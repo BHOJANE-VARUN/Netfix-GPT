@@ -82,7 +82,7 @@ const Login = () => {
         alt="bg-image"
         className="absolute top-0 left-0 w-full h-full object-cover opacity-60 z-0"
       />
-      <div className="absolute z-10 top-32 left-1/3 flex flex-col w-4/12 h-5/6 mt-0.5 ml-9  bg-black bg-opacity-80 items-center justify-center">
+      <div className="absolute z-10 top-[13%] left-[15%] flex flex-col w-[70%] h-5/6 mt-0.5  bg-black bg-opacity-80 items-center justify-center sm:w-[55%] sm:h-[70%] sm:left-[25%] sm:top-[20%] md:h-[80%] md:w-[400px] md:left-[35%]">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -95,7 +95,7 @@ const Login = () => {
           {Sign && (
             <input
               ref={nam}
-              className="bg-gray-900 w-10/12 h-12 border-2 rounded-lg text-white pl-4"
+              className="bg-gray-900 w-[98%] h-12 border-2 rounded-lg text-white pl-2"
               placeholder="Username"
               type="text"
             />
@@ -104,8 +104,8 @@ const Login = () => {
             ref={em}
             className={
               mail !== "Email or mobile number"
-                ? "bg-gray-900 w-10/12 h-12 border-2 rounded-lg text-white pl-4 placeholder-opacity-30 font-medium placeholder-red-400 "
-                : "bg-gray-900 w-10/12 h-12 border-2 rounded-lg text-white pl-4"
+                ? "bg-gray-900 w-[98%] h-12 border-2 rounded-lg text-white pl-2 placeholder-opacity-30 font-medium placeholder-red-400 "
+                : "bg-gray-900 w-[98%] h-12 border-2 rounded-lg text-white pl-2"
             }
             placeholder={mail}
             type="text"
@@ -114,34 +114,32 @@ const Login = () => {
             ref={pas}
             className={
               spas !== "Password"
-                ? "bg-gray-900 w-10/12 h-12 border-2 rounded-lg text-white pl-4 placeholder-opacity-30 font-medium placeholder-red-400 "
-                : "bg-gray-900 w-10/12 h-12 border-2 rounded-lg text-white pl-4"
+                ? "bg-gray-900 w-[98%] h-12 border-2 rounded-lg text-white pl-2 placeholder-opacity-30 font-medium placeholder-red-400 "
+                : "bg-gray-900 w-[98%] h-12 border-2 rounded-lg text-white pl-2"
             }
             placeholder={spas}
             type="password"
           />
           <button
-            className="text-white h-9  w-10/12 bg-red-700 rounded-md font-bold text-lg"
+            className="text-white h-9  w-[98%] bg-red-700 rounded-md font-bold text-lg"
             onClick={submithandle}
           >
             {!Sign ? "Sign In" : "Sign Up"}
           </button>
           {!Sign && (
-            <span className="text-white w-10/12 text-center absolute top-80 mt-8 right-16">
+            <div className="flex flex-col">
+              <span className="text-white w-[98%] text-center pb-1">
               OR
             </span>
-          )}
-          {!Sign && (
-            <div>
-              <button className="text-white w-10/12 h-9 bg-slate-100 bg-opacity-10 rounded-md font-bold text-lg">
+              <button className="text-white w-[98%] h-9 bg-slate-100 bg-opacity-10 rounded-md font-bold text-lg">
                 Use a sign-in code
               </button>
-              <button className="text-white ml-24 mt-2 hover:underline hover:text-gray-400 text-base cursor-pointer">
+              <button className="text-white ml-28 mt-2 hover:underline hover:text-gray-400 text-base cursor-pointer">
                 Forgot password?
               </button>
             </div>
           )}
-          <div className="w-10/12">
+          <div className="w-[98%]">
             <input
               id="default-checkbox"
               type="checkbox"

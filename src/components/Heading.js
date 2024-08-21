@@ -27,6 +27,7 @@ const Heading = () => {
       .catch(() => {
         navigate("/error");
       });
+      dispatch(addgpt());
   };
   useEffect(() => {
     const unsubscibe = onAuthStateChanged(auth, (user) => {
@@ -49,10 +50,10 @@ const Heading = () => {
     return () => unsubscibe();
   }, []);
   return (
-    <div className="absolute h-28 w-full flex justify-between pl-36 pr-20 items-center  bg-gradient-to-b from-black z-10">
-      <img className="w-2/12" src={LOGO_URL} alt="logo" />
+    <div className="w-full h-20 absolute  flex justify-between pt-2  bg-gradient-to-b from-black z-10">
+      <img className="w-1/3 -ml-2 sm:ml-0 sm:h-fit md:w-1/6 md:ml-10"  src={LOGO_URL} alt="logo" />
 
-      <div className="w-5/12 flex justify-evenly">
+      <div className="w-2/3 flex mt-3 gap-2  justify-end sm:gap-x-5 ">
       {showgpt && <div>
         <select className="bg-gray-800 text-white h-8 w-20" onChange={handlechange}>
           <option value={"eng"} selected>English</option>
@@ -60,8 +61,8 @@ const Heading = () => {
           <option value={"mar"}>Marathi</option>
         </select>
       </div>}
-        {user && <button className="text-black bg-white bg-opacity-80 w-36 h-10 font-bold text-xl pb-1 rounded-lg flex pt-1 hover:bg-opacity-50" onClick={handleshowgpt}>
-          <svg
+        {user && <button className="text-black bg-white bg-opacity-80 w-fit h-fit sm:w-fit sm:px-3 font-bold text-xl pb-1 rounded-lg flex pt-1 hover:bg-opacity-50 pr-1" onClick={handleshowgpt}>
+          {!showgpt && <svg
             className="transition-transform duration-1000 ease-in-out transform hover:rotate-180"
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
@@ -100,11 +101,11 @@ const Heading = () => {
               fill="url(#9yv_OTO3P9eepfu7Rtqerb_kTuxVYRKeKEY_gr2)"
               d="M53.274,26.955 c0.275-1.045,0.415-2.107,0.415-3.166c0-6.855-5.578-12.434-12.434-12.434c-0.766,0-1.553,0.079-2.35,0.235 C36.536,8.665,33.062,7,29.278,7c-5.549,0-10.353,3.622-11.913,8.891c-5.93,1.012-10.32,6.163-10.32,12.254 c0,3.448,1.424,6.715,3.93,9.07c-0.44,1.299-0.664,2.64-0.664,3.996c0,6.855,5.578,12.434,12.434,12.434 c0.433,0,0.874-0.027,1.38-0.087C26.501,56.389,29.934,58,33.633,58c5.875,0,10.96-4.192,12.152-9.878 c6.327-0.629,11.17-5.908,11.17-12.355C56.956,32.463,55.622,29.286,53.274,26.955z M51.689,23.789c0,0.646-0.07,1.293-0.193,1.937 l-12.293-7.185l-13.146,7.991v-4.91l12.814-7.972c0.813-0.191,1.615-0.295,2.383-0.295C47.008,13.355,51.689,18.036,51.689,23.789z M37.397,35.171l-5.563,3.316l-5.776-3.303v-6.311l5.465-3.322l-0.031,0.052l5.905,3.48V35.171z M29.278,9 c2.997,0,5.755,1.251,7.728,3.457l-12.948,8.054V34.04l-4.898-2.801V16.922C20.319,12.254,24.462,9,29.278,9z M9.044,28.145 c0-4.923,3.419-9.109,8.116-10.169v14.424l12.701,7.264l-5.227,3.115l-11.897-6.674C10.392,34.107,9.044,31.211,9.044,28.145z M12.311,41.211c0-0.955,0.138-1.902,0.4-2.828l11.954,6.706l12.732-7.588v6.27l-13.172,7.754c-0.57,0.078-1.043,0.12-1.48,0.12 C16.992,51.645,12.311,46.964,12.311,41.211z M33.633,56c-2.886,0-5.578-1.175-7.546-3.252l13.31-7.835V30.261l4.539,2.675V47.09 C43.192,52.173,38.773,56,33.633,56z M45.936,46.091V31.793l-6.539-3.853v-0.068h-0.115l-5.879-3.465l5.821-3.538l12.309,7.195 c2.174,1.981,3.422,4.782,3.422,7.703C54.956,41.055,51.07,45.406,45.936,46.091z"
             ></path>
-          </svg>
+          </svg>}
           <span>{!showgpt?"GPT Search":"Home Page"}</span>
         </button>}
         <button
-          className="text-white bg-red-600 w-24 h-10 font-bold text-xl pb-1  rounded-lg"
+          className="text-white bg-red-600 w-20   h-fit sm:h-10 font-bold text-xl pb-1  rounded-lg mr-2"
           onClick={handleout}
         >
           Log out

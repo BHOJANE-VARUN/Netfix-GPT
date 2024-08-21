@@ -1,9 +1,10 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTrailerVideo } from "../util/movieSlice";
 import { useEffect } from "react";
 import { OPTIONS } from "../util/Links";
 
 const useMovieTrailer = (movieid)=>{
+   const video = useSelector(store => store.movie.talierVideo);
 const dispatch = useDispatch();
 const getBackground = async () => {
   const url = 'https://api.themoviedb.org/3/tv/' + movieid  + '/videos?language=en-US';
@@ -15,6 +16,6 @@ const getBackground = async () => {
   dispatch(addTrailerVideo(backgroundvid));
 };
 useEffect(() => {
-  getBackground();
+  !video && getBackground();
 }, []);}
 export default useMovieTrailer;
