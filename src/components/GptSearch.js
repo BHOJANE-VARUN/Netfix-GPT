@@ -8,61 +8,60 @@ import GptMovies from "./GptMovies";
 function GptSearch() {
   const lang = useSelector((store) => store.lang.obj);
   const searchtext = useRef(null);
-  const searchMovieTMDB = async (movie) =>{
-    const raw = await fetch(
-      SEARCH_MOVIE + movie + SEARCH_RIGHT,OPTIONS
-    );
+  const dispatch = useDispatch();
+
+  const searchMovieTMDB = async (movie) => {
+    const raw = await fetch(SEARCH_MOVIE + movie + SEARCH_RIGHT, OPTIONS);
     const data = await raw.json();
     return data?.results;
-  }
-  const dispatch = useDispatch();
+  };
+
   const handlesubmit = async () => {
     const query =
-      "Act as a Movie Recommendation system and suggest some movies for the query" +
+      "Act as a Movie Recommendation system and suggest some movies for the query " +
       searchtext.current.value +
-      ". only give me names of 5 movies, comma separated like the example result give ahead. example result: ,movie1,movie2,movie3,movie4,movie5.And don't recommend adult movies.And if no query is there then give random indian movie names in the same format as given in example";
-    //console.log(query);
-
+      ". Only give me names of 5 movies, comma separated like the example result: ,movie1,movie2,movie3,movie4,movie5. Don't recommend adult movies. If no query is there then give random Indian movie names in the same format.";
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const gptresult = await model.generateContent(query);
-      const rawresponse = await gptresult.response;
-      const gptresponce = rawresponse.text();
-
+    const gptresult = await model.generateContent(query);
+    const rawresponse = await gptresult.response;
+    const gptresponce = rawresponse.text();
     const result = gptresponce.split(",");
-    const tmdbresults = await Promise.all(result.map((m) => searchMovieTMDB(m))); 
-    //console.log(tmdbresults);
-    dispatch(addgptResult({Moviedata:tmdbresults,Moviename:result}));
+    const tmdbresults = await Promise.all(result.map((m) => searchMovieTMDB(m)));
+    dispatch(addgptResult({ Moviedata: tmdbresults, Moviename: result }));
   };
+
   return (
-    <div className="bg-black">
-    <div className="relative w-full h-screen overflow-y-hidden">
+    <div className="relative flex flex-col pt-5 items-center min-h-screen w-full  text-white">
       <img
         src={BG_IMGAGE}
-        alt="background img"
-        className="fixed top-0 left-0 w-fit h-fit object-cover z-0"
+        alt="Background"
+        className="absolute top-0 left-0 w-full h-full object-cover z-[-1] opacity-40"
       />
-      <div className="pt-[23%] sm:pt-[18%] md:pt-[10%] md:pl-[7%] w-full flex justify-center z-10 bg-opacity-90">
-        <form
-          className="w-11/12 flex justify-between h-8 z-30 sm:w-9/12 md:w-8/12 md:h-10"
-          onSubmit={(e) => e.preventDefault()}
+
+      {/* Search Bar */}
+      <form
+        className="w-full max-w-2xl flex mt-10 px-4 gap-2"
+        onSubmit={(e) => e.preventDefault()}
+      >
+        <input
+          ref={searchtext}
+          type="text"
+          className="flex-grow px-4 py-2 rounded-md border border-gray-300 text-black text-lg"
+          placeholder={lang?.place}
+        />
+        <button
+          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-md"
+          onClick={handlesubmit}
         >
-          <input
-            ref={searchtext}
-            type="text"
-            className="bg-white border-2 border-black w-9/12 pl-2 pb-1 text-lg"
-            placeholder={lang?.place}
-          />
-          <button
-            className="text-white bg-red-600 font-bold text-xl pb-1 rounded-lg h-full w-20 md:w-2/12"
-            onClick={handlesubmit}
-          >
-            {lang?.Search}
-          </button>
-        </form>
+          {lang?.Search}
+        </button>
+      </form>
+
+      {/* GPT Movie List */}
+      <div className="w-full mt-8 px-4">
+        <GptMovies />
       </div>
-    </div>
-    <GptMovies/>
     </div>
   );
 }

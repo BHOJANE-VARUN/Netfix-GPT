@@ -1,1 +1,1 @@
-export const FIRST_MOVIE_NAME = "business proposal";
+export const FIRST_MOVIE_NAME = "The business proposal";

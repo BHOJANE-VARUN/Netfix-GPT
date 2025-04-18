@@ -1,19 +1,20 @@
-import React from 'react'
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Movielist from './Movielist';
 
 function GptMovies() {
-    const movies = useSelector(store => store.gpt.gptMovies);
-    const names = useSelector(store => store.gpt.gptMovieNames);
-    if(names==null) return;
-    
+  const movies = useSelector(store => store.gpt.gptMovies);
+  const names = useSelector(store => store.gpt.gptMovieNames);
+
+  if (!names) return null;
+
   return (
-    <div className=' absolute text-white px-10'>
-        <div className='relative -top-96 pl-11 -mt-32 w-full h-full overflow-y-scroll bg-black p-5 bg-opacity-90 hide-scrollbar z-40'>
-        {names?.map((n,index)=> <Movielist title={n} tv={movies[index]}/>)}
+    <div className="w-full mx-auto bg-black/70 p-4 rounded-lg space-y-6">
+      {names.map((name, index) => (
+        <Movielist key={index} title={name} tv={movies[index]} />
+      ))}
     </div>
-</div>
-  )
+  );
 }
 
 export default GptMovies;

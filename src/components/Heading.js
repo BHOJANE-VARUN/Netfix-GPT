@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { auth } from "../util/firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../util/userSlice";
@@ -9,7 +7,6 @@ import { addgpt } from "../util/GptSlice";
 import Lang from "../util/LangConstants";
 import { addlang } from "../util/LangSlice";
 const Heading = () => {
-  const user = useSelector(store => store.user);
   const showgpt = useSelector(store=>store.gpt.Showgpt);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,49 +16,12 @@ const Heading = () => {
   const handlechange = (e)=>{
     dispatch(addlang(Lang[e.target.value]));
   }
-  const handleout = () => {
-    signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
-      .catch(() => {
-        navigate("/error");
-      });
-      dispatch(addgpt());
-  };
-  useEffect(() => {
-    const unsubscibe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const { uid, email, displayName, photoURL } = user;
-        dispatch(
-          addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
-        );
-        navigate("/browse");
-      } else {
-        dispatch(removeUser());
-        navigate("/");
-      }
-    });
-    return () => unsubscibe();
-  }, []);
   return (
     <div className="w-full h-20 absolute  flex justify-between pt-2  bg-gradient-to-b from-black z-10">
       <img className="w-1/3 -ml-2 sm:ml-0 sm:h-fit md:w-1/6 md:ml-10"  src={LOGO_URL} alt="logo" />
 
       <div className="w-2/3 flex mt-3 gap-2  justify-end sm:gap-x-5 ">
-      {showgpt && <div>
-        <select className="bg-gray-800 text-white h-8 w-20" onChange={handlechange}>
-          <option value={"eng"} selected>English</option>
-          <option value={"hin"}>Hindi</option>
-          <option value={"mar"}>Marathi</option>
-        </select>
-      </div>}
-        {user && <button className="text-black bg-white bg-opacity-80 w-fit h-fit sm:w-fit sm:px-3 font-bold text-xl pb-1 rounded-lg flex pt-1 hover:bg-opacity-50 pr-1" onClick={handleshowgpt}>
+       <button className="text-black bg-white bg-opacity-80 w-fit h-fit sm:w-fit sm:px-3 font-bold text-xl pb-1 rounded-lg flex pt-1 hover:bg-opacity-50 pr-1 mr-5" onClick={handleshowgpt}>
           {!showgpt && <svg
             className="transition-transform duration-1000 ease-in-out transform hover:rotate-180"
             xmlns="http://www.w3.org/2000/svg"
@@ -103,12 +63,6 @@ const Heading = () => {
             ></path>
           </svg>}
           <span>{!showgpt?"GPT Search":"Home Page"}</span>
-        </button>}
-        <button
-          className="text-white bg-red-600 w-20   h-fit sm:h-10 font-bold text-xl pb-1  rounded-lg mr-2"
-          onClick={handleout}
-        >
-          Log out
         </button>
       </div>
     </div>
